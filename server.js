@@ -4,16 +4,21 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
 const userRoutes = require("./routes/userRoutes");
+const productRoutes = require("./routes/productRoutes");
 const User = require("./models/userModel");
 
 dotenv.config();
 connectDB();
 
 const app = express();
+app.use("/uploads", express.static("uploads"));
 
 app.use(cors());
 app.use(bodyParser.json());
+
+//Routes
 app.use("/api/users", userRoutes);
+app.use("/api/products", productRoutes);
 
 const createAdminUser = async () => {
   try {
