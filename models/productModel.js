@@ -10,9 +10,9 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    productCategory: {
+    category: {
       type: String,
-      // required: true,
+      required: true,
     },
     productDescription: {
       type: String,
@@ -24,7 +24,7 @@ const productSchema = new mongoose.Schema(
     },
     model: {
       type: String,
-      required: true,
+      required: false,
     },
     manufacturer: {
       type: String,
@@ -36,7 +36,7 @@ const productSchema = new mongoose.Schema(
     },
     condition: {
       type: String,
-      required: true,
+      required: false,
     },
     registration: {
       type: String,
