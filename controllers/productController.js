@@ -48,11 +48,14 @@ const createProduct = async (req, res) => {
 // GET all products
 const getAllProducts = async (req, res) => {
   try {
-    const products = await Product.find().populate(
-      "sellerId",
-      "firstName lastName email"
-    );
-    res.status(200).json(products);
+    // const products = await Product.find().populate(
+    //   "sellerId",
+    //   "firstName lastName email"
+    // );
+    const products = await Product.find();
+    const total = await Product.countDocuments();
+
+    res.json({ products, total });
   } catch (error) {
     console.error("Get All Products Error:", error.message);
     res
