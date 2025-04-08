@@ -69,7 +69,7 @@ const getProductsByCategory = async (req, res) => {
   try {
     const requestCategory = req.params.category;
 
-    const products = await Product.find({ category: requestCategory });
+    const products = await Product.find({ category: requestCategory }).populate('sellerId', 'firstName lastName');
     const total = await Product.countDocuments({ category: requestCategory });
 
     res.json({ products, total });
