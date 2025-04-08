@@ -64,6 +64,24 @@ const getAllProducts = async (req, res) => {
   }
 };
 
+// Get products by category
+const getProductsByCategory = async (req, res) => {
+  try {
+    const requestCategory = req.params.category;
+
+    const products = await Product.find({ category: requestCategory });
+    const total = await Product.countDocuments({ category: requestCategory });
+
+    res.json({ products, total });
+  } catch (error) {
+    console.error("Get Products By Category Error:", error.message);
+    res.status(500).json({
+      message: "Failed to fetch products by category",
+      error: error.message,
+    });
+  }
+};
+
 // GET a single product by ID
 const getProductById = async (req, res) => {
   try {
@@ -123,6 +141,7 @@ const deleteProduct = async (req, res) => {
 module.exports = {
   createProduct,
   getAllProducts,
+  getProductsByCategory,
   getProductById,
   updateProduct,
   deleteProduct,

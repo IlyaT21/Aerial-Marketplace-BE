@@ -137,3 +137,6 @@ dist
 
 # Visual Studio Code
 .vscode
+
+# Images from uploads folder
+uploads/*
