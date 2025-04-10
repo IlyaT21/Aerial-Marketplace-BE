@@ -69,7 +69,10 @@ const getProductsByCategory = async (req, res) => {
   try {
     const requestCategory = req.params.category;
 
-    const products = await Product.find({ category: requestCategory }).populate('sellerId', 'firstName lastName');
+    const products = await Product.find({ category: requestCategory }).populate(
+      "sellerId",
+      "firstName lastName"
+    );
     const total = await Product.countDocuments({ category: requestCategory });
 
     res.json({ products, total });
@@ -103,11 +106,23 @@ const getProductById = async (req, res) => {
 // UPDATE a product
 const updateProduct = async (req, res) => {
   try {
+    const productId = req.params.id;
+
+    const updateData = {
+      ...req.body,
+    };
+
+    // If a new image was uploaded, update the productImage field
+    if (req.file) {
+      updateData.productImage = req.file.filename;
+    }
+
     const updatedProduct = await Product.findByIdAndUpdate(
-      req.params.id,
-      req.body,
+      productId,
+      updateData,
       { new: true, runValidators: true }
     );
+
     if (!updatedProduct)
       return res.status(404).json({ message: "Product not found" });
 
