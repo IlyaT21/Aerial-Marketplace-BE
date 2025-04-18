@@ -36,6 +36,7 @@ router.put("/:id", async (req, res) => {
     firstName,
     lastName,
     email,
+    phone,
     password,
     company,
     country,
@@ -54,6 +55,7 @@ router.put("/:id", async (req, res) => {
     user.firstName = firstName || user.firstName;
     user.lastName = lastName || user.lastName;
     user.email = email || user.email;
+    user.phone = phone || user.phone;
     if (password) {
       const hashedPassword = await bcrypt.hash(password, 10);
       user.password = hashedPassword;
@@ -80,6 +82,7 @@ router.post("/register", async (req, res) => {
     firstName,
     lastName,
     email,
+    phone,
     password,
     role,
     company,
@@ -99,6 +102,7 @@ router.post("/register", async (req, res) => {
       firstName,
       lastName,
       email,
+      phone,
       password,
       role,
       company,
