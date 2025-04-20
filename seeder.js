@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcryptjs");
 const User = require("./models/userModel");
 const Product = require("./models/productModel");
-const connectDB = require("./config/db"); // adjust path as needed
+const connectDB = require("./config/db");
 
 const seedData = async () => {
   try {
