@@ -139,4 +139,4 @@ dist
 .vscode
 
 # Images from uploads folder
-uploads/*
+images/uploads/*
