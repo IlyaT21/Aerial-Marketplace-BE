@@ -83,13 +83,33 @@ const getAllProducts = async (req, res) => {
 const getProductsByCategory = async (req, res) => {
   try {
     const requestCategory = req.params.category;
+    const page = parseInt(req.query.page, 10) || null;
+    const limit = 12;
+    const filter = { category: requestCategory };
 
-    const products = await Product.find({ category: requestCategory }).populate(
+    // If page is provided, do pagination
+    if (page) {
+      const skip = (page - 1) * limit;
+      const total = await Product.countDocuments(filter);
+      const products = await Product.find(filter)
+        .skip(skip)
+        .limit(limit)
+        .populate("sellerId", "firstName lastName");
+
+      return res.json({
+        products,
+        total,
+        page,
+        pages: Math.ceil(total / limit),
+      });
+    }
+
+    // No pagination: return all in that category
+    const products = await Product.find(filter).populate(
       "sellerId",
       "firstName lastName"
     );
-    const total = await Product.countDocuments({ category: requestCategory });
-
+    const total = await Product.countDocuments(filter);
     res.json({ products, total });
   } catch (error) {
     console.error("Get Products By Category Error:", error.message);
