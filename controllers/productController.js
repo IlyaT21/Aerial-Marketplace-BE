@@ -107,7 +107,7 @@ const getProductsByCategory = async (req, res) => {
     // No pagination: return all in that category
     const products = await Product.find(filter).populate(
       "sellerId",
-      "firstName lastName"
+      "firstName lastName email phone company address city country"
     );
     const total = await Product.countDocuments(filter);
     res.json({ products, total });
@@ -125,7 +125,7 @@ const getProductById = async (req, res) => {
   try {
     const product = await Product.findById(req.params.id).populate(
       "sellerId",
-      "firstName lastName email"
+      "firstName lastName email phone company address city country"
     );
     if (!product) return res.status(404).json({ message: "Product not found" });
 
