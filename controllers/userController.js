@@ -1,4 +1,5 @@
 const User = require("../models/userModel");
+const Product = require("../models/productModel");
 const bcrypt = require("bcryptjs");
 
 // Fetch all users
@@ -80,6 +81,15 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
   try {
     const userId = req.params.id;
+
+    // Check for products created by this user
+    const productCount = await Product.countDocuments({ sellerId: userId });
+    if (productCount > 0) {
+      return res.status(400).json({
+        message: "Cannot delete user: user has existing products",
+        productCount,
+      });
+    }
 
     const deletedUser = await User.findByIdAndDelete(userId);
     if (!deletedUser) {
