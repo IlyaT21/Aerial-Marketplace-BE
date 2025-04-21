@@ -40,7 +40,7 @@ const login = async (req, res) => {
 };
 
 const register = async (req, res) => {
-  const {
+  let {
     firstName,
     lastName,
     email,
@@ -52,7 +52,6 @@ const register = async (req, res) => {
     city,
     address,
   } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
     const existingUser = await User.findOne({ email });
@@ -65,7 +64,7 @@ const register = async (req, res) => {
       lastName,
       email,
       phone,
-      hashedPassword,
+      password,
       role,
       company,
       country,

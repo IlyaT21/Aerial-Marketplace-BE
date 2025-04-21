@@ -3,8 +3,7 @@ const mongoose = require("mongoose");
 const productSchema = new mongoose.Schema(
   {
     productImage: {
-      type: String, // URL or path to the image
-      required: true,
+      type: String,
     },
     productName: {
       type: String,

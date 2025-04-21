@@ -14,10 +14,10 @@ const seedData = async () => {
     await Product.deleteMany();
     await User.deleteMany();
 
-    // Hash common passwords
-    const hashedAdminPass = await bcrypt.hash("admin123", 10);
-    const hashedSellerPass = await bcrypt.hash("seller123", 10);
-    const hashedBuyerPass = await bcrypt.hash("buyer123", 10);
+    // Passwords for test users
+    const hashedAdminPass = "admin123";
+    const hashedSellerPass = "seller123";
+    const hashedBuyerPass = "buyer123";
 
     // Create Admin
     const admin = await User.create({
@@ -70,7 +70,7 @@ const seedData = async () => {
 
     // Create Products for each seller
     const product1 = await Product.create({
-      productImage: "placeholder.png",
+      // productImage: "placeholder.png",
       productName: "Drone A1",
       category: "Drones",
       productDescription: "High-performance drone A1",
@@ -84,7 +84,7 @@ const seedData = async () => {
     });
 
     const product2 = await Product.create({
-      productImage: "placeholder.png",
+      // productImage: "placeholder.png",
       productName: "Helicopter H2",
       category: "Helicopters",
       productDescription: "Lightweight helicopter H2",
