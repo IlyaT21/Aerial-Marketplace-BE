@@ -44,6 +44,8 @@ const updateUser = async (req, res) => {
     address,
   } = req.body;
 
+  console.log(password);
+
   try {
     const user = await User.findById(id);
 
@@ -57,8 +59,7 @@ const updateUser = async (req, res) => {
     user.email = email || user.email;
     user.phone = phone || user.phone;
     if (password) {
-      const hashedPassword = await bcrypt.hash(password, 10);
-      user.password = hashedPassword;
+      user.password = password || user.password;
     }
     user.company = company || user.company;
     user.country = country || user.country;
