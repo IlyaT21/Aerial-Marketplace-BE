@@ -7,7 +7,6 @@ const connectDB = require("./config/db");
 
 const seedData = async () => {
   try {
-    // Connect to DB
     await connectDB();
 
     // Clean existing data

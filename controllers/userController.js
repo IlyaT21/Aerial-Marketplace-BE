@@ -44,8 +44,6 @@ const updateUser = async (req, res) => {
     address,
   } = req.body;
 
-  console.log(password);
-
   try {
     const user = await User.findById(id);
 

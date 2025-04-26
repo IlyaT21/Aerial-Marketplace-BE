@@ -3,9 +3,6 @@ const Product = require("../models/productModel");
 // CREATE a product
 const createProduct = async (req, res) => {
   try {
-    console.log("Incoming request body:", req.body);
-    console.log("Incoming file:", req.file);
-
     const {
       productName,
       category,
